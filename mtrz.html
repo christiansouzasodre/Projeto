@@ -1,0 +1,86 @@
+<html>
+	<meta charset="utf-8">
+	<title>Monitoramento Zona Rural</title>
+	<head>
+		<link href="enc/cssStyle.css" rel="stylesheet" type="text/css">
+		<meta charset="utf-8">
+		<!-- Relógio da Tela -->
+		<script type="text/javascript">
+			function startTime() {
+				var today = new Date();
+				var h = today.getHours();
+				var m = today.getMinutes();
+				var s = today.getSeconds();
+
+				// add a zero in front of numbers<10
+				m = checkTime(m);
+				s = checkTime(s);
+				document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
+				t = setTimeout('startTime()', 500);
+			}
+
+			function checkTime(i) {
+				if (i < 10) {
+					i = "0" + i;
+				}
+				return i;
+			}
+		</script>
+		<!-- Transformador Simulação-->
+		<script>
+			//window.onload = function() {
+			function ReadFiles() {
+				var rawFile = new XMLHttpRequest();			
+				
+				rawFile.open("GET", "transformador.txt", true);
+				rawFile.onreadystatechange = function() {
+					if (rawFile.readyState === 4) {
+						document.getElementById("textSection1").innerHTML = rawFile.responseText;
+					}
+				}
+				rawFile.send();
+			
+				var rawFile2 = new XMLHttpRequest();
+				rawFile2.open("GET", "transformador2.txt", true);
+				rawFile2.onreadystatechange = function() {
+					if (rawFile2.readyState === 4) {
+						document.getElementById("textSection2").innerHTML = rawFile2.responseText;
+					}
+				}
+
+				rawFile2.send();
+				
+					var rawFile3 = new XMLHttpRequest();
+				rawFile3.open("GET", "transformador3.txt", true);
+				rawFile3.onreadystatechange = function() {
+					if (rawFile3.readyState === 4) {
+					document.getElementById("textSection3").innerHTML = rawFile3.responseText;
+					}
+				}
+
+				rawFile3.send();
+			};
+			
+			setInterval(function() {				
+				ReadFiles();
+			}, 1000);
+		</script>
+	</head>
+	<body onload="startTime()">
+		<div classclass="container-fluid">
+			<h1>Monitoramento Rural</h1>
+			
+			<div style='position:left;margin-left:200px;margin-top:100px;width:650px;height:250px;z-index:1;' > 
+               <div id="txt"></div><br /><br /> 
+            </div>
+			
+			
+		<!---<div id="txt"></div><br /><br /> -->
+		<div class="verde" id="textSection1"></div><br /><br />
+		<div class="vermelho" id="textSection2"></div><br /><br />
+		<div class="amarelo" id="textSection3"></div>
+	
+</div>
+	</body>
+
+</html>
