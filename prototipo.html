@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> teste </title>
+        <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" >
+        <link rel="stylesheet" type="text/css" href="css.css">
+        
+        <script type="text/javascript">
+			function startTime() {
+				var today = new Date();
+				var h = today.getHours();
+				var m = today.getMinutes();
+				var s = today.getSeconds();
+
+				// add a zero in front of numbers<10
+				m = checkTime(m);
+				s = checkTime(s);
+				document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
+				t = setTimeout('startTime()', 500);
+			}
+
+			function checkTime(i) {
+				if (i < 10) {
+					i = "0" + i;
+				}
+				return i;
+			}
+		</script>
+         
+    </head>
+    <body onload="startTime()">
+        <div class="container-fluid"> 
+            <h1> MONITORAMENTO RURAL  <h2 id="txt"> </h2> </h1>
+           
+            <table class="table"> 
+                <thead> <tr> <th> COD_EQUIPAMENTO </th> <th> POTENCIA </th> <th> ESTADO </th> <th> HORA </th> </tr> </thead>
+                <tbody> <tr class="vermelho"> <td> 82362P0030 </td> <td> 0KVA </td> <td> CRITICO </td> <td> 17:07 </td> </tr> 
+                <tr class="amarelo"> <td> 82362P5421 </td> <td> 53KVA </td> <td> ALERTA </td> <td> 17:34 </td> </tr>
+                <tr class="verde"> <td> 8236P2540 </td> <td> 45KVA </td> <td> OK </td> <td> 17:36 </td> </tr>
+                     
+             </table>
+            <div id="vermelho" class="col-md-4"> </div>
+            <div id="amarelo" class="col-md-4"></div>
+            <div id="verde" class="col-md-4"> </div>
+        </div>
+      
+        <script type="text/javascript" scr ="bootstrap-3.3.7-dist/js/bootstrap.min.js" >
+    </body>
+</html>
+
